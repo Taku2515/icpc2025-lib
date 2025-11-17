@@ -33,6 +33,11 @@ jobs:
 
     - name: Build PDF
       run: make build
-    
+
+    - name: Set up git config
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
     - name: commit PDF
       run: git add . && git commit -m "[skip actions] build PDF" && git push
