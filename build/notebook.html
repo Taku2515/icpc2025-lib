@@ -64,7 +64,7 @@
     <li><a class="section" href="#string">string</a></li>
     <ol>
     <li><a href="#KMP.hpp">KMP.hpp</a></li>
-    <li><a href="#Manacher.hpp">Manacher.hpp</a></li>
+    <li><a href="#Manacher.md">Manacher.md</a></li>
     <li><a href="#RollingHash.md">RollingHash.md</a></li>
     <li><a href="#SuffixArray.hpp">SuffixArray.hpp</a></li>
     <li><a href="#Zalgorithm.hpp">Zalgorithm.hpp</a></li>
@@ -580,31 +580,38 @@ vector<span class="token operator">&lt;</span>mm<span class="token operator">></
 </div>
 
     <div class="filename">
-        <h2 id="Manacher.hpp">Manacher.hpp</h2>
-        md5: 5882fb
-
+        <h2 id="Manacher.md">Manacher.md</h2>
     </div>
-    <div class="content content-hpp">
-    <pre><code><span class="token comment">// 各位置での回文半径を求める</span>
-<span class="token comment">// aaabaaa -> 1214121</span>
-<span class="token comment">// 偶数長の回文を含めて直径を知るには，N+1 個の $ を挿入して 1 を引く</span>
-<span class="token comment">// $a$a$a$b$a$a$a$ -> 123432181234321</span>
-<span class="token keyword">auto</span> <span class="token function">manacher</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   ll n <span class="token operator">=</span> <span class="token function">sz</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-   vector<span class="token operator">&lt;</span>ll<span class="token operator">></span> <span class="token function">r</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token keyword">while</span><span class="token punctuation">(</span>i <span class="token operator">&lt;</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">while</span><span class="token punctuation">(</span>i <span class="token operator">>=</span> j <span class="token operator">&amp;&amp;</span> i <span class="token operator">+</span> j <span class="token operator">&lt;</span> n <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">[</span>i <span class="token operator">-</span> j<span class="token punctuation">]</span> <span class="token operator">==</span> s<span class="token punctuation">[</span>i <span class="token operator">+</span> j<span class="token punctuation">]</span><span class="token punctuation">)</span> j<span class="token operator">++</span><span class="token punctuation">;</span>
-      r<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> j<span class="token punctuation">;</span>
-      ll k <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-      <span class="token keyword">while</span><span class="token punctuation">(</span>i <span class="token operator">>=</span> k <span class="token operator">&amp;&amp;</span> i <span class="token operator">+</span> k <span class="token operator">&lt;</span> n <span class="token operator">&amp;&amp;</span> k <span class="token operator">+</span> r<span class="token punctuation">[</span>i <span class="token operator">-</span> k<span class="token punctuation">]</span> <span class="token operator">&lt;</span> j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         r<span class="token punctuation">[</span>i <span class="token operator">+</span> k<span class="token punctuation">]</span> <span class="token operator">=</span> r<span class="token punctuation">[</span>i <span class="token operator">-</span> k<span class="token punctuation">]</span><span class="token punctuation">;</span>
-         k<span class="token operator">++</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-      i <span class="token operator">+=</span> k<span class="token punctuation">,</span> j <span class="token operator">-=</span> k<span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">return</span> r<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    <div class="content content-md"><pre><code>vector&lt;long long&gt; manacher(const string &amp;s){
+    int i = 0, j = 0;
+    vector&lt;long long&gt; r(s.size(), 0);
+    while(i&lt;s.size()){
+        while(i-j&gt;=0 &amp;&amp; i+j&lt;s.size() &amp;&amp; s[i-j]==s[i+j]) j++;
+        r[i] = j;
+        int k = 1;
+        while(i-k&gt;=0 &amp;&amp; k+r[i-k]&lt;j) r[i+k] = r[i-k], k++;
+        i += k; j -= k;
+    }
+    return r;
+}
 </code></pre>
+<hr>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>コード</th>
+<th>計算量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$i$文字目を中心とする最長の回文半径を記録した配列の取得</td>
+<td><code>r = manacher(S)</code></td>
+<td>$O(|S|)$</td>
+</tr>
+</tbody></table>
+<p>偶数長の回文を判定する場合はダミーを交互に挿入する。
+(例: <code>abba</code> → <code>#a#b#b#a#</code>)</p>
 </div>
 
     <div class="filename">
