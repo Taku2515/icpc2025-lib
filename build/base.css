@@ -61,6 +61,12 @@ div.filename {
 /* 印刷時の設定 */
 @media print {
 
+    /* 白黒印刷用 */
+    * {
+        color: black !important;
+        background-color: white !important;
+    }
+
     body {
         column-count: 2;
         column-rule: 1px solid;
