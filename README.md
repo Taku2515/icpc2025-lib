@@ -1,36 +1,16 @@
-# ICPC_notebook
+# ICPC notebook
 
-[![Actions Status](https://github.com/tatyam-prime/ICPC_notebook/workflows/verify/badge.svg)](https://github.com/tatyam-prime/ICPC_notebook/actions) [![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=document+&color=brightgreen&logo=github)](https://tatyam-prime.github.io/ICPC_notebook/)
+## 環境構築
 
-- CSS 組版で、ファイルを置くだけで PDF が簡単に作れる、ICPC 用ライブラリのすごいテンプレート
-- かつ、みんなでつくる最強の ICPC 用ライブラリ (予定)
-- [ライブラリのドキュメント](https://tatyam-prime.github.io/ICPC_notebook/)
-- [ライブラリをまとめたページ](https://tatyam-prime.github.io/ICPC_notebook/notebook.html)
-- [ライブラリをまとめた PDF](https://tatyam-prime.github.io/ICPC_notebook/notebook.pdf)
+### 最低限やること
+```bash
+git clone git@github.com:Taku2515/icpc2025-lib.git
+cd icpc2025-lib
+```
 
-## private なコピーを作るには
-
-1. 新規 private repository を作る
-2. repository の Settings -> Actions -> Workflow permissions を Read and Write に設定
-3. `git clone https://github.com/tatyam-prime/ICPC_notebook.git && cd ICPC_notebook`
-4. `git remote set-url origin {your_private_repository_url}`
-5. `git commit -m "test" --allow-empty && git push`
-6. workflow が動くことを確認
-7. [README.md](README.md) をいい感じに修正
-
-## 内容を変更するには
-
-1. [src/\*/\*](src/) の中身を変更する
-2. [build/build.js](build/build.js) の設定項目を変更する
-3. commit & push
-
-### その他
-
-- [Makefile](Makefile) で clang-format による自動フォーマットを行っています．フォーマットの設定は [.clang-format](.clang-format) で変更できます．
-
-## 手元で動かすには
-
-### 事前にインストールするもの
+### ローカルでpdfを作成する場合
+`src/`（と必要であれば`build/`）に変更を加えれば、mainブランチにpushした段階で、pdfは最新版になる（CIが自動でpdfを build・commit・push を行うため）。
+そのため、ローカルでpdfを生成しない場合は以下のものをインストールしなくて良い。
 
 - node.js (v18 以上)
 - npm
@@ -41,18 +21,17 @@
     - `npm install -g @vivliostyle/cli`
 - その他依存関係
     - `npm install`
-- (使うなら) oj-verify
-    - `pip3 install online-judge-verify-helper`
 
-### PDF を生成する
+- pdf作成方法
+    - `make build`で作成できる。
 
-1. `make build`
 
-### oj-verify で verify
+## 作業フロー
 
-1. `make verify`
+1. [src/\*/\*](src/) の中身を変更する
+2. [build/build.js](build/build.js) の設定項目を変更する
+3. commit & push
 
-### oj-verify ページを生成
+### その他
 
-1. `make serve`
-
+- [Makefile](Makefile) で clang-format による自動フォーマットを行っている。フォーマットの設定は [.clang-format](.clang-format) で変更できる。
