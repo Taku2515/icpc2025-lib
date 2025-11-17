@@ -3,7 +3,7 @@
 
 html,
 code {
-    font-size: 7.4pt;
+    font-size: 6.0pt;
 }
 
 nav#toc {
@@ -12,11 +12,11 @@ nav#toc {
 
 @media print {
     body {
-        column-count: 2;
+        column-count: 3;
     }
 
     @page {
-        size: A4 portrait;
+        size: A4 landscape;
 
         /* ヘッダー */
         @top-left {
