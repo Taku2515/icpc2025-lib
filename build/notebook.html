@@ -34,6 +34,7 @@
     <ol>
     <li><a href="#BIT.hpp">BIT.hpp</a></li>
     <li><a href="#FastSet.hpp">FastSet.hpp</a></li>
+    <li><a href="#UnionFind.md">UnionFind.md</a></li>
     </ol>
     <li><a class="section" href="#math">math</a></li>
     <ol>
@@ -221,6 +222,75 @@ setxkbmap <span class="token parameter variable">-option</span> ctrl:nocaps
    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
+</div>
+
+    <div class="filename">
+        <h2 id="UnionFind.md">UnionFind.md</h2>
+    </div>
+    <div class="content content-md"><pre><code>struct UnionFind {
+    vector&lt;int&gt; parents; // parents[i] := 頂点iのroot
+    vector&lt;int&gt; sizes; // sizes[i] := 頂点iが属するグループの要素数
+    UnionFind(int n){
+        parents = vector&lt;int&gt;(n);
+        for(int i=0; i&lt;n; i++) parents.at(i) = i;
+        sizes = vector&lt;int&gt;(n, 1);
+    }
+    int find(int i){
+        if(parents.at(i)==i) return i; // 自身のroot == iのとき自分がroot
+        return (parents.at(i) = find(parents.at(i))); // 経路圧縮
+    }
+    void merge(int a, int b){
+        a = find(a);
+        b = find(b);
+        if(a!=b){
+            sizes.at(a) += sizes.at(b);
+            parents.at(b) = a;
+        }
+    }
+    bool connected(int a, int b){
+        return (find(a)==find(b));
+    }
+    long long size(int i){
+        return (long long)sizes.at(find(i));
+    }
+};
+</code></pre>
+<hr>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>コード</th>
+<th>計算量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>宣言</td>
+<td><code>UnionFind uf(N)</code></td>
+<td>$O(N)$</td>
+</tr>
+<tr>
+<td>aの根の取得</td>
+<td><code>uf.find(a)</code></td>
+<td>$O(\alpha(N))$</td>
+</tr>
+<tr>
+<td>aとbを統合</td>
+<td><code>uf.merge(a, b)</code></td>
+<td>$O(\alpha(N))$</td>
+</tr>
+<tr>
+<td>aとbが同じグループか判定</td>
+<td><code>uf.connected(a, b)</code></td>
+<td>$O(\alpha(N))$</td>
+</tr>
+<tr>
+<td>aと同じグループの要素数</td>
+<td><code>uf.size(a)</code></td>
+<td>$O(\alpha(N))$</td>
+</tr>
+</tbody></table>
+<p>$\alpha(N)$はアッカーマンの逆関数</p>
 </div>
 
     <h2 class="section" id="math">math</h2>
