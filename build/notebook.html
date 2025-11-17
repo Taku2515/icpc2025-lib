@@ -65,7 +65,7 @@
     <ol>
     <li><a href="#KMP.hpp">KMP.hpp</a></li>
     <li><a href="#Manacher.hpp">Manacher.hpp</a></li>
-    <li><a href="#RollingHash.hpp">RollingHash.hpp</a></li>
+    <li><a href="#RollingHash.md">RollingHash.md</a></li>
     <li><a href="#SuffixArray.hpp">SuffixArray.hpp</a></li>
     <li><a href="#Zalgorithm.hpp">Zalgorithm.hpp</a></li>
     </ol>
@@ -608,36 +608,55 @@ vector<span class="token operator">&lt;</span>mm<span class="token operator">></
 </div>
 
     <div class="filename">
-        <h2 id="RollingHash.hpp">RollingHash.hpp</h2>
-        md5: adb8d3
-
+        <h2 id="RollingHash.md">RollingHash.md</h2>
     </div>
-    <div class="content content-hpp">
-    <pre><code><span class="token comment">// using u64 = uint64_t;</span>
-<span class="token keyword">const</span> u64 mod <span class="token operator">=</span> INF<span class="token punctuation">;</span>
-u64 <span class="token function">add</span><span class="token punctuation">(</span>u64 a<span class="token punctuation">,</span> u64 b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   a <span class="token operator">+=</span> b<span class="token punctuation">;</span>
-   <span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">>=</span> mod<span class="token punctuation">)</span> a <span class="token operator">-=</span> mod<span class="token punctuation">;</span>
-   <span class="token keyword">return</span> a<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-u64 <span class="token function">mul</span><span class="token punctuation">(</span>u64 a<span class="token punctuation">,</span> u64 b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword">auto</span> c <span class="token operator">=</span> <span class="token punctuation">(</span>__uint128_t<span class="token punctuation">)</span>a <span class="token operator">*</span> b<span class="token punctuation">;</span>
-   <span class="token keyword">return</span> <span class="token function">add</span><span class="token punctuation">(</span>c <span class="token operator">>></span> <span class="token number">61</span><span class="token punctuation">,</span> c <span class="token operator">&amp;</span> mod<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-random_device rnd<span class="token punctuation">;</span>
-<span class="token keyword">const</span> u64 r <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>u64<span class="token punctuation">)</span><span class="token function">rnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token number">32</span> <span class="token operator">|</span> <span class="token function">rnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">%</span> mod<span class="token punctuation">;</span>
-<span class="token keyword">struct</span> <span class="token class-name">RH</span> <span class="token punctuation">{</span>
-   ll n<span class="token punctuation">;</span>
-   vector<span class="token operator">&lt;</span>u64<span class="token operator">></span> hs<span class="token punctuation">,</span> pw<span class="token punctuation">;</span>
-   <span class="token function">RH</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">n</span><span class="token punctuation">(</span><span class="token function">sz</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">hs</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">pw</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token function">rep</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         pw<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">mul</span><span class="token punctuation">(</span>pw<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">;</span>
-         hs<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token function">mul</span><span class="token punctuation">(</span>hs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">,</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-   <span class="token punctuation">}</span>
-   u64 <span class="token function">get</span><span class="token punctuation">(</span>ll l<span class="token punctuation">,</span> ll r<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">add</span><span class="token punctuation">(</span>hs<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">,</span> mod <span class="token operator">-</span> <span class="token function">mul</span><span class="token punctuation">(</span>hs<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">,</span> pw<span class="token punctuation">[</span>r <span class="token operator">-</span> l<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <div class="content content-md"><pre><code>struct RollingHash{
+    
+    using ll = long long;
+
+    const ll mod = (1ll&lt;&lt;61)-1;
+    ll n, rnd;
+    vector&lt;ll&gt; hs, pw;
+    RollingHash(string s): n(s.size()), hs(n+1), pw(n+1, 1) {
+        // rnd = rand()%mod;
+        rnd = 93842743347298748;
+        for(int i=0; i&lt;n; i++){
+            pw[i+1] = mul(pw[i], rnd);
+            hs[i+1] = add(mul(hs[i], rnd), s[i]);
+        }
+    };
+    ll add(ll a, ll b){
+        return (a+b)%mod;
+    }
+    ll mul(ll a, ll b){
+        auto c = (__uint128_t)a*b;
+        return add(c&gt;&gt;61, c&amp;mod);
+    }
+    ll get(ll l, ll r){
+        return add(hs[r], mod - mul(hs[l], pw[r-l]));
+    }
+};
 </code></pre>
+<hr>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>コード</th>
+<th>計算量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>宣言</td>
+<td><code>RollingHash rh(s)</code></td>
+<td>$O(s.size())$</td>
+</tr>
+<tr>
+<td>$[l, r)$のハッシュ値の取得</td>
+<td><code>rh.get(l, r)</code></td>
+<td>$O(1)$</td>
+</tr>
+</tbody></table>
 </div>
 
     <div class="filename">
