@@ -67,7 +67,7 @@
     <li><a href="#Manacher.md">Manacher.md</a></li>
     <li><a href="#RollingHash.md">RollingHash.md</a></li>
     <li><a href="#SuffixArray.hpp">SuffixArray.hpp</a></li>
-    <li><a href="#Zalgorithm.hpp">Zalgorithm.hpp</a></li>
+    <li><a href="#Zalgorithm.md">Zalgorithm.md</a></li>
     </ol>
     <li><a class="section" href="#algorithm">algorithm</a></li>
     <ol>
@@ -709,24 +709,38 @@ vector<span class="token operator">&lt;</span>mm<span class="token operator">></
 </div>
 
     <div class="filename">
-        <h2 id="Zalgorithm.hpp">Zalgorithm.hpp</h2>
-        md5: b20b04
-
+        <h2 id="Zalgorithm.md">Zalgorithm.md</h2>
     </div>
-    <div class="content content-hpp">
-    <pre><code><span class="token comment">// Z[i] := LCP(s, s[i:])</span>
-<span class="token comment">// abacaba -> 7010301</span>
-<span class="token keyword">auto</span> <span class="token function">Z</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   ll n <span class="token operator">=</span> <span class="token function">sz</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> l <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> r <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-   vector<span class="token operator">&lt;</span>ll<span class="token operator">></span> <span class="token function">z</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token function">rep</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      ll<span class="token operator">&amp;</span> x <span class="token operator">=</span> z<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token operator">&lt;</span> r <span class="token operator">?</span> <span class="token function">min</span><span class="token punctuation">(</span>r <span class="token operator">-</span> i<span class="token punctuation">,</span> z<span class="token punctuation">[</span>i <span class="token operator">-</span> l<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
-      <span class="token keyword">while</span><span class="token punctuation">(</span>i <span class="token operator">+</span> x <span class="token operator">&lt;</span> n <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">[</span>i <span class="token operator">+</span> x<span class="token punctuation">]</span> <span class="token operator">==</span> s<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">)</span> x<span class="token operator">++</span><span class="token punctuation">;</span>
-      <span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">+</span> x <span class="token operator">></span> r<span class="token punctuation">)</span> l <span class="token operator">=</span> i<span class="token punctuation">,</span> r <span class="token operator">=</span> i <span class="token operator">+</span> x<span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">return</span> z<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    <div class="content content-md"><pre><code>vector&lt;long long&gt; z_algorithm(const string &amp;s){
+    vector&lt;long long&gt; z(s.size(), 0);
+    z[0] = s.size();
+    int i = 1, j = 0;
+    while(i&lt;s.size()){
+        while(i+j&lt;s.size() &amp;&amp; s[j]==s[i+j]) j++;
+        z[i] = j;
+        if(j==0){ i++; continue; }
+        int k = 1;
+        while(i+k&lt;s.size() &amp;&amp; k+z[k]&lt;j) z[i+k] = z[k], k++;
+        i += k; j -= k;
+    }
+    return z;
+}
 </code></pre>
+<hr>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>コード</th>
+<th>計算量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>z[i]</code>=「S」と「Sのi文字目以降」の最長共通接頭辞の長さを計算</td>
+<td><code>z = z_algorithm(S)</code></td>
+<td>$O(|S|)$</td>
+</tr>
+</tbody></table>
 </div>
 
     <h2 class="section" id="algorithm">algorithm</h2>
