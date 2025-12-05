@@ -54,6 +54,7 @@
     </ol>
     <li><a class="section" href="#graph">graph</a></li>
     <ol>
+    <li><a href="#bfs.md">bfs.md</a></li>
     <li><a href="#dijkstra.md">dijkstra.md</a></li>
     </ol>
     <li><a class="section" href="#graph/tree">graph/tree</a></li>
@@ -565,6 +566,54 @@ vector<span class="token operator">&lt;</span>mm<span class="token operator">></
 </div>
 
     <h2 class="section" id="graph">graph</h2>
+
+    <div class="filename">
+        <h2 id="bfs.md">bfs.md</h2>
+    </div>
+    <div class="content content-md"><pre><code>using ll = long long;
+vector&lt;ll&gt; bfs(ll start, vector&lt;vector&lt;ll&gt;&gt; &amp;g){
+    int n = g.size();
+    queue&lt;ll&gt; q;
+    vector&lt;ll&gt; dist(n, -1);
+    q.push(start); dist.at(start) = 0;
+    while(!q.empty()){
+        ll v = q.front(); q.pop();
+        for(ll nv: g.at(v)){
+            if(dist.at(nv)!=-1) continue;
+            dist.at(nv) = dist.at(v) + 1;
+            q.push(nv);
+        }
+    }
+    return dist;
+}
+</code></pre>
+<hr>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>コード</th>
+<th>計算量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>頂点数nのグラフの宣言</td>
+<td><code>vector&lt;vector&lt;ll&gt;&gt; g; g.resize(n);</code></td>
+<td></td>
+</tr>
+<tr>
+<td>頂点sからグラフgに対してbfsの実行</td>
+<td><code>bfs(s, g)</code></td>
+<td>$O(|E|+|V|)$</td>
+</tr>
+<tr>
+<td>u→vの辺を追加</td>
+<td><code>g[u].push_back(v)</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>(ただし$|E|$は辺の数, $|V|$は頂点の数.)</p>
+</div>
 
     <div class="filename">
         <h2 id="dijkstra.md">dijkstra.md</h2>
