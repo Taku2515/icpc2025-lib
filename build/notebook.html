@@ -54,6 +54,7 @@
     </ol>
     <li><a class="section" href="#graph">graph</a></li>
     <ol>
+    <li><a href="#dijkstra.md">dijkstra.md</a></li>
     </ol>
     <li><a class="section" href="#graph/tree">graph/tree</a></li>
     <ol>
@@ -564,6 +565,59 @@ vector<span class="token operator">&lt;</span>mm<span class="token operator">></
 </div>
 
     <h2 class="section" id="graph">graph</h2>
+
+    <div class="filename">
+        <h2 id="dijkstra.md">dijkstra.md</h2>
+    </div>
+    <div class="content content-md"><pre><code>using ll = long long;
+using pll = pair&lt;ll, ll&gt;;
+const ll INF = 2e18;
+vector&lt;ll&gt; dijkstra(long long start, vector&lt;vector&lt;pll&gt;&gt; &amp;g){
+    priority_queue&lt;pll, vector&lt;pll&gt;, greater&lt;pll&gt;&gt; pq;
+    int n = g.size();
+    vector&lt;ll&gt; dist(n, INF);
+    dist[start] = 0; pq.push({0, start});
+    while(!pq.empty()){
+        auto [d, pos] = pq.top(); pq.pop();
+        if(dist[pos] &lt; d) continue;
+        for(int i=0; i&lt;g[pos].size(); i++){
+            auto [cost, to] = g[pos][i];
+            if(dist[to]&gt;dist[pos]+cost){
+                dist[to] = dist[pos] + cost;
+                pq.push({dist[to], to});
+            }
+        }
+    }
+    return dist;
+}
+</code></pre>
+<hr>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>コード</th>
+<th>計算量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>頂点数nのグラフの宣言</td>
+<td><code>vector&lt;vector&lt;pll&gt;&gt; g; g.resize(n);</code></td>
+<td></td>
+</tr>
+<tr>
+<td>頂点sからグラフgに対してダイクストラの実行</td>
+<td><code>dijkstra(s, g)</code></td>
+<td>$O(|E|log |V|)$</td>
+</tr>
+<tr>
+<td>u→v(コスト: c)の辺を追加</td>
+<td><code>g[u].push_back({c, v})</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>(ただし$|E|$は辺の数, $|V|$は頂点の数.)</p>
+</div>
 
     <h2 class="section" id="graph/tree">graph/tree</h2>
 
