@@ -44,6 +44,7 @@
     <li><a class="section" href="#modint">modint</a></li>
     <ol>
     <li><a href="#BarrettReduction.hpp">BarrettReduction.hpp</a></li>
+    <li><a href="#combination.md">combination.md</a></li>
     <li><a href="#modint.hpp">modint.hpp</a></li>
     </ol>
     <li><a class="section" href="#FPS">FPS</a></li>
@@ -355,6 +356,54 @@ ll <span class="token function">extgcd</span><span class="token punctuation">(</
    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
+</div>
+
+    <div class="filename">
+        <h2 id="combination.md">combination.md</h2>
+    </div>
+    <div class="content content-md"><pre><code>const long long MAX = 5e5; // 関数comの引数の最大値
+const long long mod = 1e9+7; // 何で割った余りか
+vector&lt;long long&gt; fac(MAX), finv(MAX), inv(MAX);
+
+void COMinit(){
+    fac[0] = 1; fac[1] = 1;
+    finv[0] = 1; finv[1] = 1;
+    inv[1] = 1;
+    for(int i=2; i&lt;MAX; i++){
+        fac[i] = fac[i-1] * i % mod;
+        inv[i] = mod - inv[mod%i] * (mod / i) % mod;
+        finv[i] = finv[i-1] * inv[i] % mod;
+    }
+}
+
+long long com(int n, int k){
+    if(n&lt;k) return 0;
+    if(n&lt;0 || k&lt;0) return 0;
+    return fac[n] * (finv[k] * finv[n-k] % mod) % mod;
+}
+</code></pre>
+<hr>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>コード</th>
+<th>計算量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>二項係数を求める前処理</td>
+<td><code>COMinit()</code></td>
+<td>$O(MAX)$</td>
+</tr>
+<tr>
+<td>二項係数${}_nC {}_k$ mod $p$の計算</td>
+<td><code>com(n, k)</code></td>
+<td>$O(1)$</td>
+</tr>
+</tbody></table>
+<p><code>com(n, k)</code>を実行する前に必ず<code>COMinit()</code>を実行する（一度だけで良い）。
+$1 \leq k \leq n \leq 10^7$ また、mod $p$の$p$は素数かつ $n&lt;p$ となる必要がある。</p>
 </div>
 
     <div class="filename">
