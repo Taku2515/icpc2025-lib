@@ -1,3 +1,4 @@
+// myhash: 76ff99
 ```
 vector<long long> z_algorithm(const string &s){
     vector<long long> z(s.size(), 0);

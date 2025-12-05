@@ -1,3 +1,4 @@
+// myhash: df6543
 ```
 struct UnionFind {
     vector<int> parents; // parents[i] := 頂点iのroot

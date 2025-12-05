@@ -1,3 +1,4 @@
+// myhash: b5cb94
 ```
 vector<long long> manacher(const string &s){
     int i = 0, j = 0;

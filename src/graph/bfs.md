@@ -1,3 +1,4 @@
+// myhash: e8220a
 ```
 using ll = long long;
 vector<ll> bfs(ll start, vector<vector<ll>> &g){

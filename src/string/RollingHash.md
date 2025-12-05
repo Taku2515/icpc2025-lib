@@ -1,3 +1,4 @@
+// myhash: 409b35
 ```
 struct RollingHash{
     

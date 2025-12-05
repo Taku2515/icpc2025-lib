@@ -1,3 +1,4 @@
+// hash: 81258e
 ```
 const long long MAX = 5e5; // 関数comの引数の最大値
 const long long mod = 1e9+7; // 何で割った余りか
