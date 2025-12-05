@@ -27,6 +27,7 @@
     <li><a class="section" href="#template">template</a></li>
     <ol>
     <li><a href="#hash.sh">hash.sh</a></li>
+    <li><a href="#myhash.md">myhash.md</a></li>
     <li><a href="#settings.sh">settings.sh</a></li>
     <li><a href="#template.hpp">template.hpp</a></li>
     </ol>
@@ -97,6 +98,15 @@
 <span class="token comment"># コメント・空白・改行を削除して md5 でハッシュする</span>
 g++ <span class="token parameter variable">-dD</span> <span class="token parameter variable">-E</span> <span class="token parameter variable">-P</span> <span class="token parameter variable">-fpreprocessed</span> - <span class="token operator">|</span> <span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'[:space:]'</span> <span class="token operator">|</span> md5sum <span class="token operator">|</span> <span class="token function">cut</span> -c-6
 </code></pre>
+</div>
+
+    <div class="filename">
+        <h2 id="myhash.md">myhash.md</h2>
+    </div>
+    <div class="content content-md"><p>ハッシュの生成は以下のコマンドで行う</p>
+<pre><code>g++ -dD -E -P -fpreprocessed - &lt; {ファイル名} | tr -d &#39;[:space:]&#39; | md5sum | cut -c-6
+</code></pre>
+<p>必ずmarkdownに記載されているコードのみを記述したcppファイルに対してハッシュを生成すること．</p>
 </div>
 
     <div class="filename">
@@ -231,7 +241,8 @@ setxkbmap <span class="token parameter variable">-option</span> ctrl:nocaps
     <div class="filename">
         <h2 id="UnionFind.md">UnionFind.md</h2>
     </div>
-    <div class="content content-md"><pre><code>struct UnionFind {
+    <div class="content content-md"><p>// myhash: df6543</p>
+<pre><code>struct UnionFind {
     vector&lt;int&gt; parents; // parents[i] := 頂点iのroot
     vector&lt;int&gt; sizes; // sizes[i] := 頂点iが属するグループの要素数
     UnionFind(int n){
@@ -364,7 +375,8 @@ ll <span class="token function">extgcd</span><span class="token punctuation">(</
     <div class="filename">
         <h2 id="combination.md">combination.md</h2>
     </div>
-    <div class="content content-md"><pre><code>const long long MAX = 5e5; // 関数comの引数の最大値
+    <div class="content content-md"><p>// hash: 81258e</p>
+<pre><code>const long long MAX = 5e5; // 関数comの引数の最大値
 const long long mod = 1e9+7; // 何で割った余りか
 vector&lt;long long&gt; fac(MAX), finv(MAX), inv(MAX);
 
@@ -571,7 +583,8 @@ vector<span class="token operator">&lt;</span>mm<span class="token operator">></
     <div class="filename">
         <h2 id="bfs.md">bfs.md</h2>
     </div>
-    <div class="content content-md"><pre><code>using ll = long long;
+    <div class="content content-md"><p>// myhash: e8220a</p>
+<pre><code>using ll = long long;
 vector&lt;ll&gt; bfs(ll start, vector&lt;vector&lt;ll&gt;&gt; &amp;g){
     int n = g.size();
     queue&lt;ll&gt; q;
@@ -619,7 +632,8 @@ vector&lt;ll&gt; bfs(ll start, vector&lt;vector&lt;ll&gt;&gt; &amp;g){
     <div class="filename">
         <h2 id="dijkstra.md">dijkstra.md</h2>
     </div>
-    <div class="content content-md"><pre><code>using ll = long long;
+    <div class="content content-md"><p>// myhash: 908dcc</p>
+<pre><code>using ll = long long;
 using pll = pair&lt;ll, ll&gt;;
 const ll INF = 2e18;
 vector&lt;ll&gt; dijkstra(long long start, vector&lt;vector&lt;pll&gt;&gt; &amp;g){
@@ -735,7 +749,8 @@ vector&lt;ll&gt; dijkstra(long long start, vector&lt;vector&lt;pll&gt;&gt; &amp;
     <div class="filename">
         <h2 id="Manacher.md">Manacher.md</h2>
     </div>
-    <div class="content content-md"><pre><code>vector&lt;long long&gt; manacher(const string &amp;s){
+    <div class="content content-md"><p>// myhash: b5cb94</p>
+<pre><code>vector&lt;long long&gt; manacher(const string &amp;s){
     int i = 0, j = 0;
     vector&lt;long long&gt; r(s.size(), 0);
     while(i&lt;s.size()){
@@ -770,7 +785,8 @@ vector&lt;ll&gt; dijkstra(long long start, vector&lt;vector&lt;pll&gt;&gt; &amp;
     <div class="filename">
         <h2 id="RollingHash.md">RollingHash.md</h2>
     </div>
-    <div class="content content-md"><pre><code>struct RollingHash{
+    <div class="content content-md"><p>// myhash: 409b35</p>
+<pre><code>struct RollingHash{
     
     using ll = long long;
 
@@ -864,7 +880,8 @@ vector&lt;ll&gt; dijkstra(long long start, vector&lt;vector&lt;pll&gt;&gt; &amp;
     <div class="filename">
         <h2 id="Zalgorithm.md">Zalgorithm.md</h2>
     </div>
-    <div class="content content-md"><pre><code>vector&lt;long long&gt; z_algorithm(const string &amp;s){
+    <div class="content content-md"><p>// myhash: 76ff99</p>
+<pre><code>vector&lt;long long&gt; z_algorithm(const string &amp;s){
     vector&lt;long long&gt; z(s.size(), 0);
     z[0] = s.size();
     int i = 1, j = 0;
