@@ -28,13 +28,11 @@
     <ol>
     <li><a href="#hash.sh">hash.sh</a></li>
     <li><a href="#myhash.md">myhash.md</a></li>
-    <li><a href="#settings.sh">settings.sh</a></li>
     <li><a href="#template.hpp">template.hpp</a></li>
     </ol>
     <li><a class="section" href="#data-structure">data-structure</a></li>
     <ol>
     <li><a href="#BIT.hpp">BIT.hpp</a></li>
-    <li><a href="#FastSet.hpp">FastSet.hpp</a></li>
     <li><a href="#UnionFind.md">UnionFind.md</a></li>
     </ol>
     <li><a class="section" href="#math">math</a></li>
@@ -46,6 +44,7 @@
     <ol>
     <li><a href="#BarrettReduction.hpp">BarrettReduction.hpp</a></li>
     <li><a href="#combination.md">combination.md</a></li>
+    <li><a href="#division.md">division.md</a></li>
     <li><a href="#modint.hpp">modint.hpp</a></li>
     </ol>
     <li><a class="section" href="#FPS">FPS</a></li>
@@ -63,7 +62,6 @@
     </ol>
     <li><a class="section" href="#flow">flow</a></li>
     <ol>
-    <li><a href="#燃やす埋める.md">燃やす埋める.md</a></li>
     </ol>
     <li><a class="section" href="#string">string</a></li>
     <ol>
@@ -82,6 +80,7 @@
     <li><a class="section" href="#memo">memo</a></li>
     <ol>
     <li><a href="#Primes.md">Primes.md</a></li>
+    <li><a href="#decimal.md">decimal.md</a></li>
     <li><a href="#sort.md">sort.md</a></li>
     </ol>
         </ol>
@@ -110,37 +109,23 @@ g++ <span class="token parameter variable">-dD</span> <span class="token paramet
 </div>
 
     <div class="filename">
-        <h2 id="settings.sh">settings.sh</h2>
-    </div>
-    <div class="content content-sh">
-    <pre><code><span class="token comment"># CLion の設定</span>
-Settings → Build → CMake → Reload CMake Project
-add_compile_options<span class="token punctuation">(</span>-D_GLIBCXX_DEBUG<span class="token punctuation">)</span>
-<span class="token comment"># Caps Lock を Ctrl に変更</span>
-setxkbmap <span class="token parameter variable">-option</span> ctrl:nocaps
-</code></pre>
-</div>
-
-    <div class="filename">
         <h2 id="template.hpp">template.hpp</h2>
-        md5: 136d85
+        md5: 465b43
 
     </div>
     <div class="content content-hpp">
     <pre><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token keyword">using</span> ll <span class="token operator">=</span> <span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> VLL <span class="token operator">=</span> vector<span class="token operator">&lt;</span>ll<span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> VVLL <span class="token operator">=</span> vector<span class="token operator">&lt;</span>VLL<span class="token operator">></span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> ll INF <span class="token operator">=</span> LLONG_MAX <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">;</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">rep</span><span class="token expression"><span class="token punctuation">(</span>i<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token keyword">for</span><span class="token punctuation">(</span>ll i <span class="token operator">=</span> a<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">rep</span><span class="token expression"><span class="token punctuation">(</span>i<span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token keyword">for</span><span class="token punctuation">(</span>ll i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token function">ll</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">all</span><span class="token expression"><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token function">begin</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">end</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">sz</span><span class="token expression"><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token function">ssize</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span></span></span>
 <span class="token keyword">bool</span> <span class="token function">chmin</span><span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> a<span class="token punctuation">,</span> <span class="token keyword">auto</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> a <span class="token operator">></span> b <span class="token operator">?</span> a <span class="token operator">=</span> b<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
 <span class="token keyword">bool</span> <span class="token function">chmax</span><span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> a<span class="token punctuation">,</span> <span class="token keyword">auto</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> a <span class="token operator">&lt;</span> b <span class="token operator">?</span> a <span class="token operator">=</span> b<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
  
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">-></span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token comment">// your code here...</span>
-<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> cout <span class="token operator">&lt;&lt;</span> fixed <span class="token operator">&lt;&lt;</span> <span class="token function">setprecision</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">}</span>
 </code></pre>
 </div>
 
@@ -172,67 +157,6 @@ setxkbmap <span class="token parameter variable">-option</span> ctrl:nocaps
    <span class="token punctuation">}</span>
    ll <span class="token function">sum</span><span class="token punctuation">(</span>ll l<span class="token punctuation">,</span> ll r<span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment">// sum of A[l, r)</span>
       <span class="token keyword">return</span> <span class="token function">sum</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">sum</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre>
-</div>
-
-    <div class="filename">
-        <h2 id="FastSet.hpp">FastSet.hpp</h2>
-        md5: 2cb8c9
-
-    </div>
-    <div class="content content-hpp">
-    <pre><code><span class="token comment">// using u64 = uint64_t;</span>
-<span class="token keyword">const</span> u64 B <span class="token operator">=</span> <span class="token number">64</span><span class="token punctuation">;</span>
-<span class="token keyword">struct</span> <span class="token class-name">FastSet</span> <span class="token punctuation">{</span>
-   u64 n<span class="token punctuation">;</span>
-   vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span>u64<span class="token operator">>></span> a<span class="token punctuation">;</span>
-   <span class="token function">FastSet</span><span class="token punctuation">(</span>u64 n_<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">n</span><span class="token punctuation">(</span>n_<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">do</span> a<span class="token punctuation">.</span><span class="token function">emplace_back</span><span class="token punctuation">(</span>n_ <span class="token operator">=</span> <span class="token punctuation">(</span>n_ <span class="token operator">+</span> B <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">while</span><span class="token punctuation">(</span>n_ <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token comment">// bool operator[](ll i) const { return a[0][i / B] >> (i % B) &amp; 1; }</span>
-   <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span>ll i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> v <span class="token operator">:</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         v<span class="token punctuation">[</span>i <span class="token operator">/</span> B<span class="token punctuation">]</span> <span class="token operator">|=</span> <span class="token number">1ULL</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>i <span class="token operator">%</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span>
-         i <span class="token operator">/=</span> B<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">void</span> <span class="token function">reset</span><span class="token punctuation">(</span>ll i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> v <span class="token operator">:</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         v<span class="token punctuation">[</span>i <span class="token operator">/</span> B<span class="token punctuation">]</span> <span class="token operator">&amp;=</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token number">1ULL</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>i <span class="token operator">%</span> B<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-         <span class="token keyword">if</span><span class="token punctuation">(</span>v<span class="token punctuation">[</span>i <span class="token operator">/</span> B<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
-         i <span class="token operator">/=</span> B<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-   <span class="token punctuation">}</span>
-   ll <span class="token function">next</span><span class="token punctuation">(</span>ll i<span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment">// i を超える最⼩の要素</span>
-      <span class="token function">rep</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token function">sz</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         i<span class="token operator">++</span><span class="token punctuation">;</span>
-         <span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">/</span> B <span class="token operator">>=</span> <span class="token function">sz</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
-         u64 d <span class="token operator">=</span> a<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token punctuation">[</span>i <span class="token operator">/</span> B<span class="token punctuation">]</span> <span class="token operator">>></span> <span class="token punctuation">(</span>i <span class="token operator">%</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span>
-         <span class="token keyword">if</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            i <span class="token operator">+=</span> <span class="token function">countr_zero</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">while</span><span class="token punctuation">(</span>h<span class="token operator">--</span><span class="token punctuation">)</span> i <span class="token operator">=</span> i <span class="token operator">*</span> B <span class="token operator">+</span> <span class="token function">countr_zero</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> i<span class="token punctuation">;</span>
-         <span class="token punctuation">}</span>
-         i <span class="token operator">/=</span> B<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-      <span class="token keyword">return</span> n<span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   ll <span class="token function">prev</span><span class="token punctuation">(</span>ll i<span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment">// i より小さい最⼤の要素</span>
-      <span class="token function">rep</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token function">sz</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         i<span class="token operator">--</span><span class="token punctuation">;</span>
-         <span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
-         u64 d <span class="token operator">=</span> a<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token punctuation">[</span>i <span class="token operator">/</span> B<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token operator">~</span>i <span class="token operator">%</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span>
-         <span class="token keyword">if</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            i <span class="token operator">-=</span> <span class="token function">countl_zero</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">while</span><span class="token punctuation">(</span>h<span class="token operator">--</span><span class="token punctuation">)</span> i <span class="token operator">=</span> i <span class="token operator">*</span> B <span class="token operator">+</span> <span class="token function">__lg</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> i<span class="token punctuation">;</span>
-         <span class="token punctuation">}</span>
-         i <span class="token operator">/=</span> B<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
@@ -419,6 +343,38 @@ long long com(int n, int k){
 </tbody></table>
 <p><code>com(n, k)</code>を実行する前に必ず<code>COMinit()</code>を実行する（一度だけで良い）。
 $1 \leq k \leq n \leq 10^7$ また、mod $p$の$p$は素数かつ $n&lt;p$ となる必要がある。</p>
+</div>
+
+    <div class="filename">
+        <h2 id="division.md">division.md</h2>
+    </div>
+    <div class="content content-md"><pre><code>long long modinv(long long a, long long m) {
+    long long b = m, u = 1, v = 0;
+    while (b) {
+        long long t = a / b;
+        a -= t * b; swap(a, b);
+        u -= t * v; swap(u, v);
+    }
+    u %= m; 
+    if (u &lt; 0) u += m;
+    return u;
+}
+</code></pre>
+<hr>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>コード</th>
+<th>計算量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$a^{-1}$ mod $m$ を計算</td>
+<td><code>modinv(a, m)</code></td>
+<td>$O(\log_{}m)$</td>
+</tr>
+</tbody></table>
 </div>
 
     <div class="filename">
@@ -686,43 +642,6 @@ vector&lt;ll&gt; dijkstra(long long start, vector&lt;vector&lt;pll&gt;&gt; &amp;
     <h2 class="section" id="graph/tree">graph/tree</h2>
 
     <h2 class="section" id="flow">flow</h2>
-
-    <div class="filename">
-        <h2 id="燃やす埋める.md">燃やす埋める.md</h2>
-    </div>
-    <div class="content content-md"><table>
-<thead>
-<tr>
-<th>変形前の制約</th>
-<th>変形後の制約</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$x$ が $0$ のとき $z$ 失う</td>
-<td>$(x, T, z)$</td>
-</tr>
-<tr>
-<td>$x$ が $0$ のとき $z$ 得る</td>
-<td>無条件で $z$ 得る; $(S, x, z)$</td>
-</tr>
-<tr>
-<td>$x$ が $1$ のとき $z$ 失う</td>
-<td>$(S, x, z)$</td>
-</tr>
-<tr>
-<td>$x$ が $1$ のとき $z$ 得る</td>
-<td>無条件で $z$ 得る; $(x, T, z)$</td>
-</tr>
-<tr>
-<td>$x, y, \dots$ がすべて $0$ のとき $z$ 得る</td>
-<td>無条件で $z$ 得る; $(S, w, z), (w, x, \infty), (w, y, \infty)$</td>
-</tr>
-<tr>
-<td>$x, y, \dots$ がすべて $1$ のとき $z$ 得る</td>
-<td>無条件で $z$ 得る; $(w, T, z), (x, w, \infty), (y, w, \infty)$</td>
-</tr>
-</tbody></table>
-</div>
 
     <h2 class="section" id="string">string</h2>
 
@@ -1074,6 +993,14 @@ vector&lt;ll&gt; dijkstra(long long start, vector&lt;vector&lt;pll&gt;&gt; &amp;
 <td>6.23e+9</td>
 </tr>
 </tbody></table>
+</div>
+
+    <div class="filename">
+        <h2 id="decimal.md">decimal.md</h2>
+    </div>
+    <div class="content content-md"><h2>小数点以下の表示する桁数について</h2>
+<pre><code>cout &lt;&lt; fixed &lt;&lt; setprecision(15) &lt;&lt; endl;
+</code></pre>
 </div>
 
     <div class="filename">
