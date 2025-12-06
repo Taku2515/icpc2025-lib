@@ -26,6 +26,10 @@
             
     <li><a class="section" href="#template">template</a></li>
     <ol>
+    <li><a href="#1setting.md">1setting.md</a></li>
+    <li><a href="#2unzip.md">2unzip.md</a></li>
+    <li><a href="#3copy_template.md">3copy_template.md</a></li>
+    <li><a href="#4checker.md">4checker.md</a></li>
     <li><a href="#hash.sh">hash.sh</a></li>
     <li><a href="#myhash.md">myhash.md</a></li>
     <li><a href="#template.hpp">template.hpp</a></li>
@@ -89,6 +93,42 @@
 
     
     <h2 class="section" id="template">template</h2>
+
+    <div class="filename">
+        <h2 id="1setting.md">1setting.md</h2>
+    </div>
+    <div class="content content-md"><h3>環境構築</h3>
+<ul>
+<li>PCログイン</li>
+<li>DOMJudgeログイン</li>
+<li>サンプルを全てダウンロード</li>
+<li>CLion起動→アクティベート</li>
+<li>VSCodium起動→AutoSave, AutoFormatの設定</li>
+<li>テンプレート書く</li>
+</ul>
+</div>
+
+    <div class="filename">
+        <h2 id="2unzip.md">2unzip.md</h2>
+    </div>
+    <div class="content content-md"><pre><code>for c in {A..L}; do mkdir -p ~/src/$c; unzip ~/Downloads/samples-$c.zip -d ~/src/$c; done
+</code></pre>
+</div>
+
+    <div class="filename">
+        <h2 id="3copy_template.md">3copy_template.md</h2>
+    </div>
+    <div class="content content-md"><pre><code>for c in {A..L}; do cp ~/template.cpp ~/src/$c/a.cpp; done
+</code></pre>
+</div>
+
+    <div class="filename">
+        <h2 id="4checker.md">4checker.md</h2>
+    </div>
+    <div class="content content-md"><pre><code>alias t=&#39;for f in *.in; do b=${f%.in}; diff &lt;(./a.out &lt; $f) $b.ans &gt;/dev/null &amp;&amp; echo $b:OK || echo $b:WA; done&#39;
+source ~/.bashrc
+</code></pre>
+</div>
 
     <div class="filename">
         <h2 id="hash.sh">hash.sh</h2>
